@@ -1,5 +1,6 @@
 package io.javacode.tpspringmvc.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ public class Etudiant implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(name = "nom", length = 30)
     private String nom;
     private Date dateNaissance;
     private String email;
