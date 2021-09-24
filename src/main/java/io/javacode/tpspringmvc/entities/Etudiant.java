@@ -17,14 +17,14 @@ public class Etudiant implements Serializable {
     private String nom;
     private Date dateNaissance;
     private String email;
-    private byte[] photo;
+    private String photo;
 
     public Etudiant() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public Etudiant(String nom, Date dateNaissance, String email, byte[] photo) {
+    public Etudiant(String nom, Date dateNaissance, String email, String photo) {
         this.nom = nom;
         this.dateNaissance = dateNaissance;
         this.email = email;
@@ -48,7 +48,7 @@ public class Etudiant implements Serializable {
         return email;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
@@ -69,7 +69,7 @@ public class Etudiant implements Serializable {
         this.email = email;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
