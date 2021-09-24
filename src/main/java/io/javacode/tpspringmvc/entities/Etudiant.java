@@ -1,9 +1,16 @@
 package io.javacode.tpspringmvc.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Etudiant {
+@Entity
+public class Etudiant implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String nom;
     private Date dateNaissance;
@@ -11,6 +18,8 @@ public class Etudiant {
     private byte[] photo;
 
     public Etudiant() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
     public Etudiant(String nom, Date dateNaissance, String email, byte[] photo) {
