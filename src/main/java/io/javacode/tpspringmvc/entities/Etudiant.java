@@ -1,5 +1,7 @@
 package io.javacode.tpspringmvc.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ public class Etudiant implements Serializable {
     private Long id;
     @Column(name = "nom", length = 30)
     private String nom;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
     private String email;
     private String photo;

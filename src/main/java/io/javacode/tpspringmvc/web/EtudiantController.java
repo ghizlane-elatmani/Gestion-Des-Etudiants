@@ -40,8 +40,15 @@ public class EtudiantController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String formEtudiant(){
+    public String formEtudiant(Model model){
+        model.addAttribute("etudiant", new Etudiant());
         return "formEtudiant";
+    }
+
+    @RequestMapping(value = "/saveEtudiant", method = RequestMethod.POST)
+    public String save(Etudiant etudiant){
+        etudiantRepository.save(etudiant);
+        return "redirect:index";
     }
 
 }
