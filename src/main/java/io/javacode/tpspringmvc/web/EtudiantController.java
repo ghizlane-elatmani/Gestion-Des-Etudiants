@@ -3,6 +3,7 @@ package io.javacode.tpspringmvc.web;
 import io.javacode.tpspringmvc.dao.EtudiantRepository;
 import io.javacode.tpspringmvc.entities.Etudiant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -48,12 +52,18 @@ public class EtudiantController {
     }
 
     @RequestMapping(value = "/saveEtudiant", method = RequestMethod.POST)
-    public String save(@Valid Etudiant etudiant, BindingResult bindingResult){
+    public String save(@Valid Etudiant etudiant,
+                       BindingResult bindingResult,
+                       @RequestParam(name="picture") MultipartFile file) throws IOException {
         if(bindingResult.hasErrors()){
-            System.out.println("bindingResult has errors");
             return "formEtudiant";
         }
-        System.out.println("bindingResult not errors");
+
+        if(!file.isEmpty()){
+            etudiant.setPhoto(file.getOriginalFilename());
+            file.transferTo(new File("/home/riri/sco/" + file.getOriginalFilename()));
+        }
+
         etudiantRepository.save(etudiant);
         return "redirect:index";
     }

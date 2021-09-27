@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -24,6 +25,7 @@ public class Etudiant implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
     @NotEmpty
+    @Email
     private String email;
     private String photo;
 
