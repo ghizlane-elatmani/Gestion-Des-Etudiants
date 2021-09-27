@@ -7,10 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -46,7 +48,12 @@ public class EtudiantController {
     }
 
     @RequestMapping(value = "/saveEtudiant", method = RequestMethod.POST)
-    public String save(Etudiant etudiant){
+    public String save(@Valid Etudiant etudiant, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            System.out.println("bindingResult has errors");
+            return "formEtudiant";
+        }
+        System.out.println("bindingResult not errors");
         etudiantRepository.save(etudiant);
         return "redirect:index";
     }

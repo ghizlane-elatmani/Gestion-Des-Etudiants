@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,9 +18,12 @@ public class Etudiant implements Serializable {
     @GeneratedValue
     private Long id;
     @Column(name = "nom", length = 30)
+    @NotEmpty
+    @Size(min=5, max=30)
     private String nom;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
+    @NotEmpty
     private String email;
     private String photo;
 
