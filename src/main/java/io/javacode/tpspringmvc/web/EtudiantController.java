@@ -92,5 +92,33 @@ public class EtudiantController {
         return "redirect:index";
     }
 
+    @RequestMapping(value = "/edit")
+    public String edit(Long id, Model model){
+        Etudiant etudiant = etudiantRepository.getById(id);
+        model.addAttribute("etudiant", etudiant);
+        return "editEtudiant";
+    }
+
+    @RequestMapping(value = "/updateEtudiant", method = RequestMethod.POST)
+    public String update(@Valid Etudiant etudiant,
+                       BindingResult bindingResult,
+                       @RequestParam(name="picture") MultipartFile file) throws IOException {
+        if(bindingResult.hasErrors()){
+            return "editEtudiant";
+        }
+
+        if(!file.isEmpty()){
+            etudiant.setPhoto(file.getOriginalFilename());
+        }
+
+        etudiantRepository.save(etudiant);
+
+        if(!file.isEmpty()){
+            etudiant.setPhoto(file.getOriginalFilename());
+            file.transferTo(new File("/home/riri/sco/" + etudiant.getId()));
+        }
+
+        return "redirect:index";
+    }
 
 }
